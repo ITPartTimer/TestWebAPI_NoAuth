@@ -13,6 +13,8 @@ namespace TestWebAPI_NoAuth.Controllers
     [RoutePrefix("api/const/product")]
     public class ProductController : ApiController
     {
+        // Not using dependancy injection at this time
+
         ProductRepository _repository = new ProductRepository();
 
         public ProductController()
