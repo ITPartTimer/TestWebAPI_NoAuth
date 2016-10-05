@@ -4,13 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TestWebAPI_NoAuth.Interfaces;
 using TestWebAPI_NoAuth.Repositories;
 using TestWebAPI_NoAuth.Models;
 
 namespace TestWebAPI_NoAuth.Controllers
 {
-    [RoutePrefix("api/const/product")]
+    [RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
         // Not using dependancy injection at this time
@@ -22,8 +21,11 @@ namespace TestWebAPI_NoAuth.Controllers
 
         }
 
-        [Route("all")]
+        [Route("resp/all")]
         [HttpGet]
+        //
+        // Controllers using HttpResponseMessage
+        //
         public HttpResponseMessage GetAll()
         {
             IEnumerable<ProductModel> products = this._repository.GetAll();
@@ -35,7 +37,7 @@ namespace TestWebAPI_NoAuth.Controllers
             return Request.CreateResponse<IEnumerable<ProductModel>>(HttpStatusCode.OK, products);
         }
 
-        [Route("details/{Id}")]
+        [Route("resp/details/{Id}")]
         [HttpGet]
         public HttpResponseMessage GetById(int Id)
         {
@@ -46,6 +48,35 @@ namespace TestWebAPI_NoAuth.Controllers
 
             // Try using an factory returned model.  Not sure if this works.
             return Request.CreateResponse(HttpStatusCode.OK, product);
+        }
+
+        //
+        // Controllers using IHttpActionResult
+        //
+        [Route("action/all")]
+        [HttpGet]
+        //
+        // Controllers using HttpResponseMessage
+        //
+        public IHttpActionResult GetAll_Action()
+        {
+            IEnumerable<ProductModel> products = this._repository.GetAll();
+
+            if (products == null)
+                return NotFound();
+
+            // Try using an factory returned model
+            return Ok <IEnumerable<ProductModel>> (products);
+        }
+
+        public IHttpActionResult GetById_Action(int Id)
+        {
+            ProductModel product = this._repository.GetDetails(Id);
+
+            if (product == null)
+                return NotFound();
+
+            return Ok<ProductModel>(product);
         }
     }
 }

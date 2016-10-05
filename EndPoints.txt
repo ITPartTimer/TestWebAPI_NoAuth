@@ -1,0 +1,7 @@
+ProductsController
+==================
+api/product/resp/all
+api/product/resp/details/{Id}
+
+api/product/action/all
+api/product/action/details/{Id}
