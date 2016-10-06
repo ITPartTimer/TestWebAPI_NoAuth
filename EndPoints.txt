@@ -1,7 +1,26 @@
+==================
 ProductsController
 ==================
+HttpResponseMesssage
+--------------------
 api/product/resp/all
 api/product/resp/details/{Id}
 
+IHttpActionResult
+-----------------
 api/product/action/all
 api/product/action/details/{Id}
+
+==================
+BufferController
+==================
+HttpResponseMesssage
+--------------------
+api/buffer/all
+api/buffer/coil/{coilNo}
+
+==================
+TrafficController
+==================
+api/traffic/ship/all
+api/traffic/recv/all

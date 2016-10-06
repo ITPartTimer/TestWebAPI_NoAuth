@@ -21,11 +21,11 @@ namespace TestWebAPI_NoAuth.Controllers
 
         }
 
-        [Route("resp/all")]
-        [HttpGet]
         //
         // Controllers using HttpResponseMessage
         //
+        [Route("resp/all")]
+        [HttpGet]
         public HttpResponseMessage GetAll()
         {
             IEnumerable<ProductModel> products = this._repository.GetAll();
@@ -42,9 +42,14 @@ namespace TestWebAPI_NoAuth.Controllers
         public HttpResponseMessage GetById(int Id)
         {
             ProductModel product = this._repository.GetDetails(Id);
-
+            
+            //
+            // If null product is handled in the repo, the NotFound will be returned as 
+            // an HttpResponseExceptoin.  Not text will be provided.  If handled here, you
+            // can add a message to the NotFound Response
+            //
             if (product == null)
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Product not found");
 
             // Try using an factory returned model.  Not sure if this works.
             return Request.CreateResponse(HttpStatusCode.OK, product);
@@ -55,9 +60,6 @@ namespace TestWebAPI_NoAuth.Controllers
         //
         [Route("action/all")]
         [HttpGet]
-        //
-        // Controllers using HttpResponseMessage
-        //
         public IHttpActionResult GetAll_Action()
         {
             IEnumerable<ProductModel> products = this._repository.GetAll();
@@ -69,6 +71,8 @@ namespace TestWebAPI_NoAuth.Controllers
             return Ok <IEnumerable<ProductModel>> (products);
         }
 
+        [Route("action/details/{Id}")]
+        [HttpGet]
         public IHttpActionResult GetById_Action(int Id)
         {
             ProductModel product = this._repository.GetDetails(Id);

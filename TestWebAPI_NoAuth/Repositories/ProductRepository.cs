@@ -32,10 +32,16 @@ namespace TestWebAPI_NoAuth.Repositories
         public ProductModel GetDetails(int Id)
         {
             var product = products.FirstOrDefault((p) => p.Id == Id);
-            if (product == null)
-            {
-                throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
-            }
+
+            //
+            // Throw a HttpResponseException in the Repository if product is not found, OR
+            // Comment out.  A null prouct is returned to the controller.  The controller
+            // will handle the response
+            //
+            //if (product == null)
+            //{
+            //    throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
+            //}
 
             return product;
         }
