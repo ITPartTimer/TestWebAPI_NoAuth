@@ -1,4 +1,12 @@
 ==================
+Header and Body
+==================
+Get
+---
+Content-Type: application/json
+Accept: application/json
+
+==================
 ProductsController
 ==================
 HttpResponseMesssage
@@ -22,5 +30,5 @@ api/buffer/coil/{coilNo}
 ==================
 TrafficController
 ==================
-api/traffic/ship/all
-api/traffic/recv/all
+api/traffic/ship/all/{d}
+api/traffic/recv/all/{d}

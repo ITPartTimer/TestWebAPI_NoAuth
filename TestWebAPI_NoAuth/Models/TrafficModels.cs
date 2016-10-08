@@ -12,7 +12,7 @@ namespace TestWebAPI_NoAuth.Models
         public DateTime ApptDate { get; set; }
         public string Customer { get; set; }
         public string Carrier { get; set; }
-        public string notes { get; set; }
+        public string Notes { get; set; }
     }
 
     public class RecvApptModel
@@ -22,6 +22,6 @@ namespace TestWebAPI_NoAuth.Models
         public DateTime ApptDate { get; set; }
         public string Customer { get; set; }
         public string Carrier { get; set; }
-        public string notes { get; set; }
+        public string Notes { get; set; }
     }
 }

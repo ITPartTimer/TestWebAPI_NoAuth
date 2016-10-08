@@ -9,7 +9,7 @@ namespace TestWebAPI_NoAuth.Interfaces
 {
     interface ITrafficRepository
     {
-        IEnumerable<ShipApptModel> GetShipAll();
-        IEnumerable<RecvApptModel> GetRecvAll();
+        IEnumerable<ShipApptModel> GetShipAll(DateTime d);
+        IEnumerable<RecvApptModel> GetRecvAll(DateTime d);
     }
 }
