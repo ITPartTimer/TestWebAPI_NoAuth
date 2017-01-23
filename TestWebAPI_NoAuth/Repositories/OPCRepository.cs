@@ -22,7 +22,7 @@ namespace TestWebAPI_NoAuth.Repositories
         }
 
         //  Add all modes except Tail
-        public void Add(OPCBindingModel opc)
+        public int Add(OPCBindingModel opc)
         {
             // Get Density
             SqlConnection conn = new SqlConnection(_InCConnString);
@@ -30,7 +30,7 @@ namespace TestWebAPI_NoAuth.Repositories
 
             int errcode = 1;
             string errmsg = "INSERT_Mode ERROR";
-            int opcID = 0;
+            int modeID = 0;
 
             using (conn)
             {
@@ -58,7 +58,17 @@ namespace TestWebAPI_NoAuth.Repositories
 
                 conn.Close();
 
-            }         
+            }
+
+            // ---------------------------------------------
+            // Throw expection if errcode <> 0 OR OPCModeID = 0
+            // ---------------------------------------------
+            if (errcode != 0)
+                throw new Exception(errmsg);
+            else if (modeID == 0)
+                throw new Exception(errmsg);
+            else
+                return modeID;
         } // Add
 
         // Add Tail mode.  This closes the current OPC Interval
@@ -81,6 +91,7 @@ namespace TestWebAPI_NoAuth.Repositories
                 cmd.Connection = conn;
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@cc", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@catid", SqlDbType.Int, 8, ParameterDirection.Input, opc.CatID);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@secs", SqlDbType.Int, 8, ParameterDirection.Input, opc.Secs);
 

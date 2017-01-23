@@ -25,17 +25,21 @@ namespace TestWebAPI_NoAuth.Controllers
         [HttpPost]
         public IHttpActionResult Add(OPCBindingModel opc)
         {
+            int id = 0;
+
             //Use CoilCalcBindingModel as input to method to allow validaiton
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _repo.Add(opc);
+            id = _repo.AddTail(opc);
 
-           //How to handle a Not Ok response
+            // Need a different return than NotFound()
+            if (id == 0)
+                return NotFound();
 
-            return Ok();
+            return Ok(id);
         }
 
         [Route("add/tail")]

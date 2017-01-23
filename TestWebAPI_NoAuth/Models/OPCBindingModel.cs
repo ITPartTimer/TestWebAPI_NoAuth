@@ -12,6 +12,9 @@ using System.ComponentModel.DataAnnotations;
         public int OPCID { get; set; }
 
         [Required]
+        public int CC { get; set; }
+
+        [Required]
         public int CatID { get; set; }
 
         [Required]
