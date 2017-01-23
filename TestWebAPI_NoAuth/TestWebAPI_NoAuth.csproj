@@ -125,17 +125,20 @@
     </Compile>
     <Compile Include="Interfaces\IBufferRepository.cs" />
     <Compile Include="Interfaces\ICalcRepositories.cs" />
+    <Compile Include="Interfaces\IOPCRepository.cs" />
     <Compile Include="Interfaces\ITrafficRepository.cs" />
     <Compile Include="Models\BufferModel.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Models\CalcBindingModels.cs" />
     <Compile Include="Models\CalcModels.cs" />
+    <Compile Include="Models\OPCBindingModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\TrafficModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Repositories\BufferRepository.cs" />
     <Compile Include="Repositories\CalcRepositories.cs" />
+    <Compile Include="Repositories\OPCRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\TrafficRepository.cs" />
   </ItemGroup>
