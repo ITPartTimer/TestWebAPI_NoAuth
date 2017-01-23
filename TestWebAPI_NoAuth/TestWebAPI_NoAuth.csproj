@@ -118,6 +118,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BufferController.cs" />
     <Compile Include="Controllers\CalcController.cs" />
+    <Compile Include="Controllers\OPCController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TrafficController.cs" />
     <Compile Include="Global.asax.cs">
