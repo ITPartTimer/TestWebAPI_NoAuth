@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using TestWebAPI_NoAuth.Repositories;
 using TestWebAPI_NoAuth.Models;
+using System.Threading.Tasks;
 
 namespace TestWebAPI_NoAuth.Controllers
 {
@@ -20,6 +21,43 @@ namespace TestWebAPI_NoAuth.Controllers
 
         }
 
-        //Need async methods for api/opc/add and api/opc/add/tail
+        [Route("add")]
+        [HttpPost]
+        public IHttpActionResult Add(OPCBindingModel opc)
+        {
+            //Use CoilCalcBindingModel as input to method to allow validaiton
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _repo.Add(opc);
+
+           //How to handle a Not Ok response
+
+            return Ok();
+        }
+
+        [Route("add/tail")]
+        [HttpPost]
+        public IHttpActionResult Tail(OPCBindingModel opc)
+        {
+            int id = 0;
+
+            //Use CoilCalcBindingModel as input to method to allow validaiton
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Return the new Interval OPCID
+            id = _repo.AddTail(opc);
+
+            // Need a different return than NotFound()
+            if (id == 0)
+                return NotFound();
+
+            return Ok(id);
+        }
     }
 }

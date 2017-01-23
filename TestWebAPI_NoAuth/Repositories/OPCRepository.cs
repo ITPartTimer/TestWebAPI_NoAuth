@@ -8,6 +8,7 @@ using TestWebAPI_NoAuth.Interfaces;
 using TestWebAPI_NoAuth.Helpers;
 using System.Web.Configuration;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace TestWebAPI_NoAuth.Repositories
 {
