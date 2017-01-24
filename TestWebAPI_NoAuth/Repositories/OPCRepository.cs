@@ -47,14 +47,14 @@ namespace TestWebAPI_NoAuth.Repositories
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errcode", SqlDbType.Int, 8, ParameterDirection.Output);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errmsg", SqlDbType.NVarChar, 50, ParameterDirection.Output);
 
-                HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Output);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@modeid", SqlDbType.Int, 8, ParameterDirection.Output);
 
                 cmd.ExecuteNonQuery();
 
+                // Assign output parameters to variables
                 errcode = Convert.ToInt32(cmd.Parameters["@errcode"].Value);
                 errmsg = Convert.ToString(cmd.Parameters["@errmsg"].Value);
-
-                // Need to handle errors here
+                modeID = Convert.ToInt32(cmd.Parameters["@modeid"].Value);
 
                 conn.Close();
 
@@ -80,7 +80,7 @@ namespace TestWebAPI_NoAuth.Repositories
 
             int errcode = 1;
             string errmsg = "INSERT_Tail ERROR";
-            int opcID = 0;
+            int newOPCID = 0;
 
             using (conn)
             {
@@ -91,19 +91,21 @@ namespace TestWebAPI_NoAuth.Repositories
                 cmd.Connection = conn;
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
-                HelpersMethods.AddParamToSQLCmd(cmd, "@cc", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@cc", SqlDbType.Int, 8, ParameterDirection.Input, opc.CC);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@catid", SqlDbType.Int, 8, ParameterDirection.Input, opc.CatID);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@secs", SqlDbType.Int, 8, ParameterDirection.Input, opc.Secs);
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errcode", SqlDbType.Int, 8, ParameterDirection.Output);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errmsg", SqlDbType.NVarChar, 50, ParameterDirection.Output);
 
-                HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Output);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@newid", SqlDbType.Int, 8, ParameterDirection.Output);
 
                 cmd.ExecuteNonQuery();
 
+                // Assign output parameters to variables
                 errcode = Convert.ToInt32(cmd.Parameters["@errcode"].Value);
                 errmsg = Convert.ToString(cmd.Parameters["@errmsg"].Value);
+                newOPCID = Convert.ToInt32(cmd.Parameters["@newid"].Value);
 
                 conn.Close();
 
@@ -114,10 +116,10 @@ namespace TestWebAPI_NoAuth.Repositories
             // ---------------------------------------------
             if (errcode != 0)
                 throw new Exception(errmsg);
-            else if (opcID == 0)
+            else if (newOPCID == 0)
                 throw new Exception(errmsg);
             else
-                return opcID;
+                return newOPCID;
         } // AddTail
     }
 }

@@ -25,7 +25,7 @@ namespace TestWebAPI_NoAuth.Controllers
         [HttpPost]
         public IHttpActionResult Add(OPCBindingModel opc)
         {
-            int id = 0;
+            int modeID = 0;
 
             //Use CoilCalcBindingModel as input to method to allow validaiton
             if (!ModelState.IsValid)
@@ -33,20 +33,20 @@ namespace TestWebAPI_NoAuth.Controllers
                 return BadRequest(ModelState);
             }
 
-            id = _repo.AddTail(opc);
+            modeID = _repo.Add(opc);
 
             // Need a different return than NotFound()
-            if (id == 0)
+            if (modeID == 0)
                 return NotFound();
 
-            return Ok(id);
+            return Ok(modeID);
         }
 
         [Route("add/tail")]
         [HttpPost]
-        public IHttpActionResult Tail(OPCBindingModel opc)
+        public IHttpActionResult AddTail(OPCBindingModel opc)
         {
-            int id = 0;
+            int newID = 0;
 
             //Use CoilCalcBindingModel as input to method to allow validaiton
             if (!ModelState.IsValid)
@@ -55,13 +55,13 @@ namespace TestWebAPI_NoAuth.Controllers
             }
 
             // Return the new Interval OPCID
-            id = _repo.AddTail(opc);
+            newID = _repo.AddTail(opc);
 
             // Need a different return than NotFound()
-            if (id == 0)
+            if (newID == 0)
                 return NotFound();
 
-            return Ok(id);
+            return Ok(newID);
         }
     }
 }
