@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
         public int CC { get; set; }
 
         [Required]
-        public int CatID { get; set; }
+        public string Cat { get; set; }
 
         [Required]
         public int Secs { get; set; }

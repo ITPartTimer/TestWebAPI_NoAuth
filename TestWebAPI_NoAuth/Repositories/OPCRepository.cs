@@ -41,7 +41,7 @@ namespace TestWebAPI_NoAuth.Repositories
                 cmd.Connection = conn;
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
-                HelpersMethods.AddParamToSQLCmd(cmd, "@catid", SqlDbType.Int, 8, ParameterDirection.Input, opc.CatID);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@cat", SqlDbType.NVarChar, 15, ParameterDirection.Input, opc.Cat);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@secs", SqlDbType.Int, 8, ParameterDirection.Input, opc.Secs);            
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errcode", SqlDbType.Int, 8, ParameterDirection.Output);
@@ -92,7 +92,7 @@ namespace TestWebAPI_NoAuth.Repositories
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@opcid", SqlDbType.Int, 8, ParameterDirection.Input, opc.OPCID);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@cc", SqlDbType.Int, 8, ParameterDirection.Input, opc.CC);
-                HelpersMethods.AddParamToSQLCmd(cmd, "@catid", SqlDbType.Int, 8, ParameterDirection.Input, opc.CatID);
+                HelpersMethods.AddParamToSQLCmd(cmd, "@cat", SqlDbType.NVarChar, 15, ParameterDirection.Input, opc.Cat);
                 HelpersMethods.AddParamToSQLCmd(cmd, "@secs", SqlDbType.Int, 8, ParameterDirection.Input, opc.Secs);
 
                 HelpersMethods.AddParamToSQLCmd(cmd, "@errcode", SqlDbType.Int, 8, ParameterDirection.Output);
