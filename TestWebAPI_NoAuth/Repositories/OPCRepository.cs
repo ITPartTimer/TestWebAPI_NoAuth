@@ -112,7 +112,7 @@ namespace TestWebAPI_NoAuth.Repositories
             }
 
             // ---------------------------------------------
-            // Throw expection if errcode <> 0 OR ProRpt = 0
+            // Throw expection if errcode <> 0 OR OPCID = 0
             // ---------------------------------------------
             if (errcode != 0)
                 throw new Exception(errmsg);

@@ -27,17 +27,22 @@ namespace TestWebAPI_NoAuth.Controllers
         {
             int modeID = 0;
 
-            //Use CoilCalcBindingModel as input to method to allow validaiton
+            // Use OPCBindingModel to validate
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            modeID = _repo.Add(opc);
-
-            // Need a different return than NotFound()
-            if (modeID == 0)
-                return NotFound();
+            // Exception will be thrown by SQL if a ROLLBACK TRAN
+            // happens or the output parameter value = 0
+            try
+            {
+                modeID = _repo.Add(opc);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }              
 
             return Ok(modeID);
         }
@@ -48,18 +53,22 @@ namespace TestWebAPI_NoAuth.Controllers
         {
             int newID = 0;
 
-            //Use CoilCalcBindingModel as input to method to allow validaiton
+            //Use OPCBindingModel to validate
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Return the new Interval OPCID
-            newID = _repo.AddTail(opc);
-
-            // Need a different return than NotFound()
-            if (newID == 0)
-                return NotFound();
+            // Exception will be thrown by SQL if a ROLLBACK TRAN
+            // happens or the output parameter value = 0
+            try
+            {
+                newID = _repo.AddTail(opc);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
 
             return Ok(newID);
         }

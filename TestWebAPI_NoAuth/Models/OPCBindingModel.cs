@@ -8,16 +8,23 @@ using System.ComponentModel.DataAnnotations;
 {
     public class OPCBindingModel
     {
-        [Required]
+        // Could use FluentValidator for numeric validation.
+        // Decided to use ComponentModel RegularExpression, since
+        // Fluent would be overkill
+        // ^(0|[1-9][0-9]*)$
+        // [RegularExpression(@"^\d+$")]
+        // [RegularExpression("([1-9][0-9]*)")] for 1-inf
+
+        [Required(ErrorMessage = "OPCID missing")]
         public int OPCID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "CC missing")]
         public int CC { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Cat missing")]
         public string Cat { get; set; }
 
-        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Secs not integer")]
         public int Secs { get; set; }
     }
 }
