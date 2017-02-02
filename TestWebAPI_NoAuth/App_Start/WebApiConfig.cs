@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation.WebApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -9,7 +10,8 @@ namespace TestWebAPI_NoAuth
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            // Adding FluentValidation
+            FluentValidationModelValidatorProvider.Configure(config);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
